@@ -61,6 +61,8 @@ interface EntitySkills {
   id: number;
   name: string;
   totalDamage: number;
+  damageWithBa: number;
+  damageWithFa: number;
   maxDamage: number;
   hits: Hits;
   breakdown: Breakdown[];
@@ -71,6 +73,8 @@ function createEntitySkill(): EntitySkills {
     id: 0,
     name: "",
     totalDamage: 0,
+    damageWithBa: 0,
+    damageWithFa:0,
     maxDamage: 0,
     hits: {
       casts: 0,
@@ -603,6 +607,11 @@ export class LogParser extends EventEmitter {
       damageOwner.skills[logLine.skillName].hits.crit += critCount;
       damageOwner.skills[logLine.skillName].hits.backAttack += backAttackCount;
       damageOwner.skills[logLine.skillName].hits.frontAttack += frontAttackCount;
+
+      damageOwner.skills[logLine.skillName].damageWithBa +=
+        backAttackCount * logLine.damage;
+      damageOwner.skills[logLine.skillName].damageWithFa +=
+        frontAttackCount * logLine.damage;
     }
 
     if (damageOwner.isPlayer) {
