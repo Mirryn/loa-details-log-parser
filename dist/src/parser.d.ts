@@ -58,6 +58,8 @@ interface EntitySkills {
     id: number;
     name: string;
     totalDamage: number;
+    damageWithBa: number;
+    damageWithFa: number;
     maxDamage: number;
     hits: Hits;
     breakdown: Breakdown[];
